@@ -16,14 +16,5 @@ export const getUser = async (req,res)=>{
 
  }
 
-export const createUser = (req,res)=>{
-    const {name,email,password,role}= req.body;
- if(!name||!email||!password||!role){
-    return res.status(804).json({
-        message : "All Fields are required"
-    })}
-
-
-} 
 
 
