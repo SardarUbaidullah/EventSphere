@@ -35,7 +35,7 @@ export const registration = async (req,res)=>{
   }
   if(!name||!email||!password||!role){
     return res.status(400).json({
-        message : "All Fields are required"
+        message : "All Fields are Required"
     })
   }
 
