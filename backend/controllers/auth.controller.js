@@ -1,6 +1,7 @@
 import { userModel } from "../models/auth.model";
 
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 //to get users
 export const getUser = async (req,res)=>{
  const {name,email,password,role} = req.body;
@@ -37,8 +38,12 @@ export const registration = async (req,res)=>{
         message : "All Fields are required"
     })
   }
+
+  const hashedPassword = await bcrypt.hash(password,10)
+
+
   const user = await userModel.create({
-    name,email,password,role
+    name,email,password:hashedPassword,role
   })
 
 const token = jwt.sign({id : user._id},process.env.JWT_SECRET,{
