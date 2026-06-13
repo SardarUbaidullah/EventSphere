@@ -1,7 +1,7 @@
-import { userModel } from "../models/auth.model";
+import { userModel } from "../models/auth.model.js";
 
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 //to get users
 export const getUser = async (req,res)=>{
  const {name,email,password,role} = req.body;
@@ -19,11 +19,11 @@ export const getUser = async (req,res)=>{
 
 export const createUser = (req,res)=>{
     const {name,email,password,role}= req.body;
- if(!name||!email||!password||!role){
+ if(!name||!email||!password){
     return res.status(804).json({
         message : "All Fields are required"
     })}
-
+  }
 export const registration = async (req,res)=>{
   const {name,email,password,role} = req.body;
   try{
@@ -33,7 +33,7 @@ export const registration = async (req,res)=>{
         message : "User already exists"
     })
   }
-  if(!name||!email||!password||!role){
+  if(!name||!email||!password){
     return res.status(400).json({
         message : "All Fields are Required"
     })
@@ -69,4 +69,3 @@ res.cookie("token",token)
 } 
 
 
-}
